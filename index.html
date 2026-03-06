@@ -214,8 +214,31 @@
 </footer>
 
 <script>
-function handleSignup(){var e=document.getElementById('emailInput').value;if(e&&e.includes('@')){document.getElementById('signupForm').style.display='none';document.querySelector('.form-note').style.display='none';document.getElementById('successMsg').style.display='block';console.log('Signup:',e)}}
-function handleSignup2(){var e=document.getElementById('emailInput2').value;if(e&&e.includes('@')){document.getElementById('signupForm2').style.display='none';document.getElementById('successMsg2').style.display='block';console.log('Signup:',e)}}
+async function handleSignup(){
+  var e=document.getElementById('emailInput').value;
+  if(e&&e.includes('@')){
+    try{
+      const r=await fetch('/api/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e})});
+      if(r.ok){
+        document.getElementById('signupForm').style.display='none';
+        document.querySelector('.form-note').style.display='none';
+        document.getElementById('successMsg').style.display='block';
+      }
+    }catch(err){console.error(err)}
+  }
+}
+async function handleSignup2(){
+  var e=document.getElementById('emailInput2').value;
+  if(e&&e.includes('@')){
+    try{
+      const r=await fetch('/api/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e})});
+      if(r.ok){
+        document.getElementById('signupForm2').style.display='none';
+        document.getElementById('successMsg2').style.display='block';
+      }
+    }catch(err){console.error(err)}
+  }
+}
 </script>
 </body>
 </html>
